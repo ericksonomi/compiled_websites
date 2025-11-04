@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html lang="es">
 <head>
   <meta charset="utf-8">
@@ -202,5 +202,155 @@
       }
     }
   </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YriSystems | Portafolio de Aplicaciones</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #1e1e2f, #2b2b40);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      color: #00bcd4;
+    }
+
+    header p {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+
+    .apps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 900px;
+      margin-top: 30px;
+    }
+
+    .app-card {
+      background: #292945;
+      border-radius: 15px;
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 188, 212, 0.3);
+    }
+
+    .app-icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+    }
+
+    .app-name {
+      font-size: 1.2rem;
+      color: #00bcd4;
+      font-weight: 600;
+    }
+
+    .app-desc {
+      color: #aaa;
+      font-size: 0.95rem;
+      margin-top: 6px;
+    }
+
+    footer {
+      margin-top: 50px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00bcd4;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>YriSystems</h1>
+    <p>Soluciones tecnológicas integrales — Desarrollo de software y sistemas empresariales</p>
+  </header>
+
+  <section class="apps-container">
+    <a href="./app_roka/" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/2721/2721291.png" class="app-icon" alt="App Roka" />
+      <div class="app-name">App Roka</div>
+      <div class="app-desc">Sistema punto de venta, contabilidad y gestión comercial</div>
+    </a>
+
+    <a href="./web_roka/" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/3601/3601733.png" class="app-icon" alt="Web Roka" />
+      <div class="app-name">Web Roka</div>
+      <div class="app-desc">Versión web empresarial con acceso a reportes y panel administrativo</div>
+    </a>
+
+    <a href="#" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/4320/4320355.png" class="app-icon" alt="RRHH" />
+      <div class="app-name">RRHH</div>
+      <div class="app-desc">Gestión de recursos humanos y control de nómina</div>
+    </a>
+
+    <a href="#" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/993/993928.png" class="app-icon" alt="Prestamos" />
+      <div class="app-name">Préstamos</div>
+      <div class="app-desc">Administración de créditos, clientes y cobranzas</div>
+    </a>
+
+    <a href="#" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/992/992700.png" class="app-icon" alt="Lotería" />
+      <div class="app-name">Lotería</div>
+      <div class="app-desc">Gestión de sorteos y estadísticas en tiempo real</div>
+    </a>
+
+    <a href="#" class="app-card">
+      <img src="https://cdn-icons-png.flaticon.com/512/201/201623.png" class="app-icon" alt="Tours" />
+      <div class="app-name">Tours</div>
+      <div class="app-desc">Sistema para agencias de viajes y empresas de turismo</div>
+    </a>
+  </section>
+
+  <footer>
+    <p>© 2025 YriSystems. Todos los derechos reservados. | <a href="#">www.yri.systems</a></p>
+  </footer>
 </body>
 </html>
