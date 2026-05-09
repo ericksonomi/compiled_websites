@@ -46,6 +46,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     body: JSON.stringify(registroData)
                 });
 
+                console.log('Registro data sent:', registroData);
+                console.log('Response status:', response.status);
+                console.log('Response body:', await response.text());
+
                 if (!response.ok) {
                     const errorBody = await response.text();
                     throw new Error(`Error ${response.status}: ${errorBody}`);
