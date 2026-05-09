@@ -4,59 +4,78 @@
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
     const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
 
     if (registrationForm) {
         registrationForm.addEventListener('submit', async function(e) {
             e.preventDefault();
 
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+
             // Collect form data
             const formData = new FormData(this);
             const registroData = {
-                nombre: formData.get('nombre'),
-                telefono: formData.get('telefono'),
-                email: formData.get('email'),
-                empresa: formData.get('empresa'),
+                nombre_completo: formData.get('nombre'),
+                telefono_whatsapp: formData.get('telefono'),
+                correo_electronico: formData.get('email'),
+                empresa_marca: formData.get('empresa') || '',
                 ciudad: formData.get('ciudad'),
-                tipo: formData.get('tipo'),
-                intereses: formData.getAll('intereses').join(', '),
-                dias: formData.get('dias'),
-                comentario: formData.get('comentario'),
-                fecha_registro: new Date().toLocaleString('es-DO'),
-                acuerdo: formData.get('acuerdo') ? 'Sí' : 'No'
+                tipo_participante: formData.get('tipo'),
+                interes_invertir: Boolean(formData.get('interes_invertir')),
+                interes_comprar_villa: Boolean(formData.get('interes_comprar_villa')),
+                interes_comprar_lote: Boolean(formData.get('interes_comprar_lote')),
+                interes_conocer_proyectos: Boolean(formData.get('interes_conocer_proyectos')),
+                interes_networking: Boolean(formData.get('interes_networking')),
+                interes_participar_broker: Boolean(formData.get('interes_participar_broker')),
+                interes_conocer_sponsors: Boolean(formData.get('interes_conocer_sponsors')),
+                interes_participar_premios: Boolean(formData.get('interes_participar_premios')),
+                dias_asistencia: formData.get('dias'),
+                comentario_adicional: formData.get('comentario') || ''
             };
 
             try {
-                // Save to Google Sheets via FormSubmit
-                await fetch('https://formspree.io/f/mwpokdlg', {
+                const response = await fetch('https://dev-sorteosys.onrender.com/crm/registro_fede', {
                     method: 'POST',
-                    body: JSON.stringify(registroData),
                     headers: {
-                        'Content-Type': 'application/json'
-                    }
-                }).catch(e => console.log('Email service note:', e));
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(registroData)
+                });
 
-                // Send WhatsApp notification
-                const whatsappMessage = `Nuevo registro en Festival Inmobiliario:\n\nNombre: ${registroData.nombre}\nTeléfono: ${registroData.telefono}\nEmail: ${registroData.email}\nEmpresa: ${registroData.empresa}\nCiudad: ${registroData.ciudad}\nTipo: ${registroData.tipo}\nIntereses: ${registroData.intereses}\nDías: ${registroData.dias}\nComentario: ${registroData.comentario}\n\nFecha: ${registroData.fecha_registro}`;
-                
-                const whatsappUrl = `https://wa.me/18299081444?text=${encodeURIComponent(whatsappMessage)}`;
+                if (!response.ok) {
+                    const errorBody = await response.text();
+                    throw new Error(`Error ${response.status}: ${errorBody}`);
+                }
 
                 // Show success message
                 this.style.display = 'none';
-                successMessage.style.display = 'block';
+                if (successMessage) {
+                    successMessage.style.display = 'block';
+                }
 
                 // Reset form
                 setTimeout(() => {
                     this.reset();
                     this.style.display = 'block';
-                    successMessage.style.display = 'none';
+                    if (successMessage) {
+                        successMessage.style.display = 'none';
+                    }
                     
                     // Scroll to top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }, 3000);
-
             } catch (error) {
                 console.error('Error:', error);
-                alert('Hubo un error al registrar. Por favor intenta de nuevo.');
+                if (errorText) {
+                    errorText.textContent = 'No se pudo completar tu registro. Por favor vuelve a intentarlo en unos segundos.';
+                }
+                if (errorMessage) {
+                    errorMessage.style.display = 'block';
+                }
             }
         });
     }
